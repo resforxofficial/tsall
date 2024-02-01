@@ -1,8 +1,9 @@
-interface str {
-    /**
-     * string to int value to its value
-     * @param value A value of its string to parse int
-     */
-    parseInt(value: string): number,
-    indexOf(scrString: string): number
-}
+declare interface list extends Array<any> {}
+
+declare interface int extends Number {}
+
+export declare interface dict<T> { [key: string | number]: T }
+
+export declare var list: list;
+
+export declare var int: int;
