@@ -29,3 +29,4 @@ export function endElement(array: any[], searchStr: string | number): boolean {
 
     return false;
 }
+
