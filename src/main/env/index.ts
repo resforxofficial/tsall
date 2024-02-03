@@ -1,5 +1,5 @@
 // import * as n from './env/func';
-import { int, list, dict, str } from '../pm5';
+import { int, list, dict, str, floatArray, char, float, None } from '../pm5';
 
 /*
 const a: list = [1, 2, 3];
@@ -72,6 +72,10 @@ export function type(value: str | int | object | any): str {
     return typeof value;
 }
 
+export function Tofloat(value: string): int {
+    return parseFloat(value);
+}
+
 /*
 const d3: dict<any> = { a: "d", b: 3 };
 console.log(d3);
@@ -88,3 +92,14 @@ for (let i = 0; i < aofb.length; i++) {
 */
 
 /* commited by resforx */
+
+/*
+const fa1: floatArray<number> = [1.23, 1.24]
+const en1: int = fa1[0] + fa1[1];
+const res = en1.toFixed(2);
+
+console.log(float(res));
+*/
+
+const f1: float = 1.23;
+const f2: floatArray = [1.23, f1];

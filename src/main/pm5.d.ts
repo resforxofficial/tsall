@@ -1,13 +1,15 @@
-declare interface list extends Array<any> {}
+export declare interface list extends Array<any> {}
 
-declare interface int extends Number {}
+export declare type int = number;
 
 export declare interface dict<T> extends Record<any, T> {}
 
-declare interface str extends String {}
+export declare type str = string;
 
-export declare var list: list;
+export declare type char = str;
 
-export declare var int: int;
+export declare type float = number;
 
-export declare var str: str;
+export declare interface floatArray extends Array<float> {}
+
+export declare type None = null;
