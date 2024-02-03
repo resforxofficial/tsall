@@ -1,5 +1,5 @@
 // import * as n from './env/func';
-import { int, list, dict, str, floatArray, char, float, None } from '../pm5';
+import { int, list, dict, str, floatArray, char, float, None, listdict } from '../pm5';
 
 /*
 const a: list = [1, 2, 3];
@@ -99,7 +99,30 @@ const en1: int = fa1[0] + fa1[1];
 const res = en1.toFixed(2);
 
 console.log(float(res));
-*/
+export declare interface weird<T, U> { (value: T): U }
+export declare interface weird<T, U> { (value: T): U }
 
 const f1: float = 1.23;
 const f2: floatArray = [1.23, f1];
+
+*/
+
+/*
+const person: dict<number> = { a: 1, b: 2 };
+
+const testld: listdict<number> = { a: [1, 2], b: [3, 4] };
+console.log(testld);
+*/
+
+export function combine(vax: any[], vay: any[]): list {
+    return vax.concat(vay);
+}
+
+export function addelement<T>(ld: listdict<T>, key: str | int | any, value: T[]) {
+    ld[key] = value;
+}
+
+/*
+addelement<number>(testld, "c", [5, 6]);
+console.log(testld);
+*/
