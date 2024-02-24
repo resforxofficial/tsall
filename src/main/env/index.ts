@@ -1,5 +1,8 @@
 // import * as n from './env/func';
 import { int, list, dict, str, floatArray, char, float, None, listdict } from '../pm5';
+import { utilizeState } from '../../utilizeState/utilizeState.index';
+import { set } from './index.set';
+// import { a } from './index.set';
 
 /*
 const a: list = [1, 2, 3];
@@ -126,3 +129,26 @@ export function addelement<T>(ld: listdict<T>, key: str | int | any, value: T[])
 addelement<number>(testld, "c", [5, 6]);
 console.log(testld);
 */
+
+// const store = set((value) => { console.log(value) }, [1, 2, 3]);
+// store();
+
+// const [hi, setHi] = utilizeState("hi");
+// console.log(hi);
+
+// setHi("hello");
+// console.log(hi); // 이 부분을 setHi("hello") 이후에 이동
+
+// // 위 코드를 수정하여 아래와 같이 변경할 수 있습니다.
+// const [hi1, setHi1] = utilizeState("hi");
+// console.log(hi1);
+
+// setHi1("hello");
+
+// console.log(hi1); // "hello"가 출력됩니다.
+
+const [count, setCount] = utilizeState(0);
+
+for (let i = 1; i <= 10; i++) {
+    setCount(count + i);
+}

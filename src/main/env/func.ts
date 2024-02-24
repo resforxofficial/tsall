@@ -23,10 +23,6 @@ function lastElement(arr: any[]) {
  * @returns boolean to true or false
  */
 export function endElement(array: any[], searchStr: string | number): boolean {
-    if (lastElement(array) === searchStr) {
-        return true;
-    }
-
-    return false;
+    return lastElement(array) === searchStr ? true : false;
 }
 
