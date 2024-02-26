@@ -4,6 +4,7 @@
 
 export {};
 
+/*
 function testset<T>(func: (value: T) => void, arr: T[]): void {
     arr.forEach(func);
 }
@@ -21,3 +22,10 @@ const a1 = testset1<number>((value) => {
         console.log(i);
     }
 }, 5);
+*/
+
+// export function set<T>(initializer: (value: T) => void): T {
+//     const value = {} as T;
+//     initializer(value);
+//     return value;
+// }
