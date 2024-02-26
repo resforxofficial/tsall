@@ -1,0 +1,62 @@
+/*
+function testset<T>(func: (value: T) => void, arr: T[]): void {
+    arr.forEach(func);
+}
+
+const a = testset<string>((value) => {
+    console.log(value);
+}, ["hello", "world"]);
+
+function testset1<T>(func: (value: T) => void, num: T): void {
+    func(num);
+}
+
+const a1 = testset1<number>((value) => {
+    for (let i = 0; i < value; i++) {
+        console.log(i);
+    }
+}, 5);
+*/
+
+// export function set<T>(initializer: (value: T) => void): T {
+//     const value = {} as T;
+//     initializer(value);
+//     return value;
+// }
+
+// // StateSetter 타입 정의
+
+// interface State<T> {
+//   state: T;
+//   setState: (updater: StateSetter<T>) => void;
+// }
+
+// function utilizeState<T>(initialState: T): State<T> {
+//   let currentState = initialState;
+
+//   const updateState = (updater: StateSetter<T>) => {
+//     // StateSetter가 함수인 경우 함수를 호출하여 새로운 상태를 생성
+//     const newState = typeof updater === 'function' ? (updater as (prevState: T) => T)(currentState) : updater;
+//     // 새로운 상태를 현재 상태로 설정
+//     currentState = { ...currentState, ...newState };
+//   };
+
+//   return { state: currentState, setState: updateState };
+// }
+
+// 사용 예시
+// interface MyState {
+//   count: number;
+//   message: string;
+// }
+
+// const initialState: MyState = {
+//   count: 0,
+//   message: "Hello",
+// };
+
+// const { state, setState } = utilizeState(initialState);
+// console.log(state);
+
+// setState(value => ({ count: value.count + 1, message: "hello world" }));
+// console.log(state); // { count: 1, message: "hello world" }

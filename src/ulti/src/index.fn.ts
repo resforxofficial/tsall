@@ -1,31 +1,24 @@
 /**
  * test or study of typescript hd function
  */
-
 export {};
 
-/*
-function testset<T>(func: (value: T) => void, arr: T[]): void {
-    arr.forEach(func);
+type StateSetter<T> = T | ((prevState: T) => T);
+
+interface State<T> {
+  getState: () => T;
+  setState: (updater: StateSetter<T>) => void;
 }
 
-const a = testset<string>((value) => {
-    console.log(value);
-}, ["hello", "world"]);
+export function utilizeState<T>(initialState: T): State<T> {
+  let currentState = initialState;
 
-function testset1<T>(func: (value: T) => void, num: T): void {
-    func(num);
+  const getState = () => currentState;
+
+  const updateState = (updater: StateSetter<T>) => {
+    const newState = typeof updater === 'function' ? (updater as (prevState: T) => T)(currentState) : updater;
+    currentState = { ...currentState, ...newState };
+  };
+
+  return { getState, setState: updateState };
 }
-
-const a1 = testset1<number>((value) => {
-    for (let i = 0; i < value; i++) {
-        console.log(i);
-    }
-}, 5);
-*/
-
-// export function set<T>(initializer: (value: T) => void): T {
-//     const value = {} as T;
-//     initializer(value);
-//     return value;
-// }
