@@ -144,3 +144,44 @@ setState(value => ({
 console.log(getState().deep.nested.obj.count); */
 
 /* Success! ( or phew? succeeded! ) */
+
+// redux like patterns
+/*
+const types = { inc: "increase", dec: "decrease" };
+
+const reducer = (state: any, { type, by = 1 }: { type: any, by: number }) => {
+    switch(type) {
+        case types.inc:
+            return { grumps: state.grumps + by };
+        case types.dec:
+            return { grumps: state.grumps - by };
+        default:
+            return state;
+    }
+}
+
+interface IinitialState {
+    grumps: number,
+    dispatch: (args: any) => void
+}
+
+const initialState: IinitialState = {
+    grumps: 0,
+    dispatch: (action) => {}
+}
+
+const { getState, setState } = utilizeState(initialState);
+console.log(getState().grumps);
+
+setState(value => ({
+    grumps: 0,
+    dispatch: (action) => {
+        setState(state => reducer(state, action));
+    }
+}));
+
+getState().dispatch({ type: types.inc, by: 2 });
+console.log(getState().grumps);
+*/
+
+/* Success! ( or phew? succeeded! ) */
