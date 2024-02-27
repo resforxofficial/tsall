@@ -1,6 +1,6 @@
 // import { set } from '../src/index.fn';
 
-import { utilizeState } from "../src/index.fn";
+import { utilizeImmer, utilizeReduce, utilizeState } from "../src/index.fn";
 
 // interface ISet {
 //     message: string;
@@ -54,6 +54,7 @@ getState().setCount();
 
 console.log(getState().count); */
 
+/*
 interface Count {
     count: number,
     setCount: () => void
@@ -78,5 +79,68 @@ console.log(getState().count);
 getState().setCount();
 
 console.log(getState().count);
+*/
+
+/*
+interface Count {
+    count: number,
+    setCount: () => void
+}
+
+const Counter: Count = {
+    count: 0,
+    setCount: () => {}
+}
+
+const { getState, setState } = utilizeState(Counter);
+console.log(getState().count);
+
+setState(value => ({ 
+    ...value, 
+    setCount: () => {
+        setState(utilizeImmer<any>(draft => {
+            draft.count += 1;
+        })(value));
+    } 
+}));
+
+console.log(getState().count);
+getState().setCount();
+
+console.log(getState().count);
+*/
+
+/* Success! ( or phew? succeeded! ) */
+
+/*
+// normal approach
+interface Nested {
+    deep: {
+        nested: {
+            obj: { count: number }
+        }
+    }
+}
+
+const initialState: Nested = {
+    deep: {
+        nested: {
+            obj: {
+                count: 0
+            }
+        }
+    }
+}
+
+const { getState, setState } = utilizeState(initialState);
+console.log(getState().deep.nested.obj.count);
+
+setState(value => ({
+    deep: utilizeReduce<Nested["deep"]>(draft => {
+        draft.nested.obj.count = draft.nested.obj.count + 1;
+    })(value.deep),
+}));
+
+console.log(getState().deep.nested.obj.count); */
 
 /* Success! ( or phew? succeeded! ) */
