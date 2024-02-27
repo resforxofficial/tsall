@@ -2,6 +2,7 @@
  * test or study of typescript hd function
  */
 export {};
+import { produce } from 'immer';
 
 type StateSetter<T> = T | ((prevState: T) => T);
 
@@ -21,4 +22,12 @@ export function utilizeState<T>(initialState: T): State<T> {
   };
 
   return { getState, setState: updateState };
+}
+
+export function utilizeImmer<T>(updater: (draft: T) => T): (state: T) => T {
+  return (state: T) => produce(state, updater);
+}
+
+export function utilizeReduce<T>(updater: (draft: T) => void): (state: T) => T {
+  return (state: T) => produce(state, updater);
 }

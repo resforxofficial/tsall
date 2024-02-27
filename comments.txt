@@ -60,3 +60,15 @@ const a1 = testset1<number>((value) => {
 
 // setState(value => ({ count: value.count + 1, message: "hello world" }));
 // console.log(state); // { count: 1, message: "hello world" }
+
+// setState(value => ({
+//     deep: {
+//         nested: {
+//             obj: {
+//                 count: value.deep.nested.obj.count + 1
+//             }
+//         }
+//     }
+// }));
+
+// console.log(getState().deep.nested.obj.count);
