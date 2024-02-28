@@ -9,6 +9,7 @@ type StateSetter<T> = T | ((prevState: T) => T);
 interface State<T> {
   getState: () => T;
   setState: (updater: StateSetter<T>) => void;
+  dispatch?: (args: number) => void;
 }
 
 export function utilizeState<T>(initialState: T): State<T> {
@@ -30,4 +31,40 @@ export function utilizeImmer<T>(updater: (draft: T) => T): (state: T) => T {
 
 export function utilizeReduce<T>(updater: (draft: T) => void): (state: T) => T {
   return (state: T) => produce(state, updater);
+}
+
+/* 상태: 보류
+export function utilizeCreateStore<T>(initialState: T): State<T> {
+  const { getState, setState } = utilizeState(initialState);
+  
+  const dispatch = (updater: (draft: T) => void) => {
+    setState(prevState => {
+      updater(prevState);
+      return prevState;
+    });
+  };
+
+  return { getState, setState, dispatch };
+}
+*/
+
+interface Iinstance {
+  args: number,
+  dispatch: (args: number) => void
+}
+
+export function utilizeMultipleStore(...stores: any[]): any {
+  const mergedState = stores.reduce((acc, store) => ({ ...acc, ...store }), {});
+
+  const { getState, setState } = utilizeState(mergedState);
+
+  const dispatch = (args: number) => {
+      stores.forEach(store => {
+          if(typeof store.dispatch === 'function') {
+              store.dispatch(args);
+          }
+      });
+  };
+
+  return { getState, setState, dispatch };
 }

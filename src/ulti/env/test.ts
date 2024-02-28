@@ -1,4 +1,4 @@
-import { utilizeImmer, utilizeReduce, utilizeState } from "../src/index.fn";
+import { utilizeImmer, utilizeMultipleStore, utilizeReduce, utilizeState } from "../src/index.fn";
 
 // interface MyState {
 //   count: number;
@@ -216,3 +216,169 @@ console.log(`name: ${getState().name}   age: ${getState().age}`);
 
 /* reset state test (down) */
 /* here */
+
+/* auto creating stores */ // 에러 사레 (자동상태make기)
+// interface UtilizeStateResult<T> {
+//     getState: () => T;
+//     setState: (newState: T | ((prevState: T) => T)) => void;
+// }
+
+// interface IStore {
+//     autoCreateStore: <T>(f: T) => UtilizeStateResult<T>;
+// }
+
+// const Store: IStore = {
+//     autoCreateStore: (f) => {
+//         if (!f) {
+//             throw new Error("Invalid argument");
+//         }
+//         const { getState, setState } = utilizeState(f);
+//         return { getState, setState };
+//     }
+// }
+
+// const { getStoreState, setStoreState } = utilizeState(Store);
+
+// setStoreState(value => ({
+//     autoCreateStore: (f) => {
+//         const { getState, setState } = utilizeState(f ? f : "Invalid argument");
+//         return { getState, setState };
+//     },
+// }));
+
+// interface Iinstance {
+//     arg: number,
+//     dispatch: (args: number) => void
+// }
+
+// const instanceStore: Iinstance = {
+//     arg: 0,
+//     dispatch: (args) => {}
+// }
+
+// const { getInstanceState, setInstanceState } = getStoreState().autoCreateStore(instanceStore);
+
+// interface Iinstance {
+//     args: number,
+//     dispatch: (args: number) => void
+// }
+
+// const instanceStore: Iinstance = {
+//     args: 0,
+//     dispatch: (args) => {}
+// };
+
+// const { getState, setState } = utilizeState(instanceStore);
+
+// setState(value => ({
+//     args: 0,
+//     dispatch: (f) => utilizeCreateStore<any>(draft => {
+//         draft.args += 1
+//     })
+// }));
+
+// const { get, set } = utilizeState(first);
+// 보류
+
+// const types = { inc: "increase", dec: "decrease" }; 개빠르게 성공
+
+// const reducer = (state: any, { type, by = 1 }: { type: any, by: number }) => {
+//     switch(type) {
+//         case types.inc:
+//             return { grumps: state.grumps + by };
+//         case types.dec:
+//             return { grumps: state.grumps - by };
+//         default:
+//             return state;
+//     }
+// }
+
+// interface IinitialState {
+//     grumps: number,
+//     dispatch: (args: any) => void,
+//     reset: () => void
+// }
+
+// const initialState: IinitialState = {
+//     grumps: 0,
+//     dispatch: (action) => {},
+//     reset: () => {}
+// }
+
+// const { getState, setState } = utilizeState(initialState);
+// console.log(getState().grumps);
+
+// setState(value => ({
+//     grumps: 0,
+//     dispatch: (action) => {
+//         setState(state => reducer(state, action));
+//     },
+//     reset: () => {
+//         setState(initialState);
+//     }
+// }));
+
+// getState().dispatch({ type: types.inc, by: 2 });
+// console.log(getState().grumps);
+
+// getState().reset();
+// console.log(getState().grumps);\
+
+// const types = { inc: "increase", dec: "decrease" }; updateReducer 성공
+
+// const reducer = (state: any, { type, by = 1 }: { type: any, by: number }) => {
+//     switch(type) {
+//         case types.inc:
+//             return { grumps: state.grumps + by };
+//         case types.dec:
+//             return { grumps: state.grumps - by };
+//         default:
+//             return state;
+//     }
+// }
+
+// interface IinitialState {
+//     grumps: number,
+//     dispatch: (reducer: any, action: any) => void   // 리듀서를 인자로 받을 수 있게 수정
+// }
+
+// const initialState: IinitialState = {
+//     grumps: 0,
+//     dispatch: (reducer, action) => {}
+// }
+
+// const { getState, setState } = utilizeState(initialState);
+// console.log(getState().grumps);
+
+// setState(value => ({
+//     grumps: 0,
+//     dispatch: (reducer, action) => {   // reducer를 인자로 받을 수 있게 수정
+//         setState(state => reducer(state, action));
+//     }
+// }));
+
+// // 사용 예
+// getState().dispatch(reducer, { type: types.inc, by: 2 });  // 원하는 리듀서를 인자로 전달
+// console.log(getState().grumps);
+
+interface Keys {
+    args1: number,
+    args2: string
+}
+
+interface Action {
+    update: () => void,
+    dispatch: () => void
+}
+
+const keyStore: Keys = {
+    args1: 0,
+    args2: ""
+}
+
+const ActionStore: Action = {
+    update: () => {},
+    dispatch: () => {}
+}
+
+const { getState, setState } = utilizeMultipleStore(keyStore, ActionStore);
