@@ -1,22 +1,4 @@
-// import { set } from '../src/index.fn';
-
 import { utilizeImmer, utilizeReduce, utilizeState } from "../src/index.fn";
-
-// interface ISet {
-//     message: string;
-//     updateMessage: (value: string) => void;
-// }
-
-// const store = set<ISet>((value) => {
-//     value.message = "";
-//     value.updateMessage = (state) => {
-//         value.message = state;
-//     };
-// });
-
-// const { message, updateMessage } = store;
-// updateMessage("kim");
-// console.log(message);
 
 // interface MyState {
 //   count: number;
@@ -53,6 +35,8 @@ console.log(getState().count);
 getState().setCount();
 
 console.log(getState().count); */
+
+
 
 /*
 interface Count {
@@ -113,7 +97,6 @@ console.log(getState().count);
 /* Success! ( or phew? succeeded! ) */
 
 /*
-// normal approach
 interface Nested {
     deep: {
         nested: {
@@ -185,3 +168,51 @@ console.log(getState().grumps);
 */
 
 /* Success! ( or phew? succeeded! ) */
+
+/*
+/* ex.1) create people controller (succeeded)
+interface IPerson {
+    name: string,
+    age: number,
+    dispatch: (args: string, arg2: number) => void
+}
+
+const Person: IPerson = {
+    name: "kim",
+    age: 15,
+    dispatch: (action, action2) => {}
+}
+
+const { getState, setState } = utilizeState(Person);
+console.log(`name: ${getState().name}   age: ${getState().age}`);
+
+setState(value => ({
+    name: "kim",
+    age: 15,
+    dispatch: (a, b) => {
+        setState(prev => ({ ...prev, name: a ? a : "", age: b ? b: 0 }));
+    }
+}));
+
+getState().dispatch("james", 20);
+console.log(`name: ${getState().name}   age: ${getState().age}`);
+*/
+
+/* no store actions */
+// type Iinter = { args: number; };
+
+// const inter: Iinter = {
+//     args: 0
+// }
+
+// const { getState, setState } = utilizeState(inter);
+// console.log(getState().args);
+
+// setState(value => ({
+//     args: 0
+// }));
+
+/* 어쩔 수가 없음 */
+
+/* reset state test (down) */
+/* here */
