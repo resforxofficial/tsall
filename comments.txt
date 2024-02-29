@@ -72,3 +72,27 @@ const a1 = testset1<number>((value) => {
 // }));
 
 // console.log(getState().deep.nested.obj.count);
+
+export function utilizeEffect<T>(watch: () => T, effect: (value: T) => void): void {
+  let oldValue = watch();
+  setInterval(() => {
+    const newValue = watch();
+    if (oldValue !== newValue) {
+      effect(newValue);
+      oldValue = newValue;
+    }
+  }, 100);
+}
+
+export function utilizeMemo<T>(factory: () => T, deps: any[]): T {
+  let memoDeps = deps;
+  let memoValue = factory();
+  return () => {
+    const newDeps = deps;
+    if (memoDeps.some((dep, i) => !Object.is(dep, newDeps[i]))) {
+      memoDeps = newDeps;
+      memoValue = factory();
+    }
+    return memoValue;
+  };
+}

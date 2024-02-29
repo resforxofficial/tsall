@@ -1,4 +1,4 @@
-import { utilizeImmer, utilizeMultipleStore, utilizeReduce, utilizeState } from "../src/index.fn";
+import { utilizeImmer, utilizeMultipleState, utilizeReduce, utilizeState } from "../src/index.fn";
 
 // interface MyState {
 //   count: number;
@@ -170,33 +170,38 @@ console.log(getState().grumps);
 /* Success! ( or phew? succeeded! ) */
 
 /*
-/* ex.1) create people controller (succeeded)
-interface IPerson {
-    name: string,
-    age: number,
-    dispatch: (args: string, arg2: number) => void
-}
+/* ex.1) create people controller (succeeded) */
+// interface IPerson {
+//     name: string,
+//     age: number,
+//     dispatch: (args: string, arg2: number) => void,
+//     reset: () => void
+// }
 
-const Person: IPerson = {
-    name: "kim",
-    age: 15,
-    dispatch: (action, action2) => {}
-}
+// const Person: IPerson = {
+//     name: "kim",
+//     age: 15,
+//     dispatch: (action, action2) => {},
+//     reset: () => {}
+// }
 
-const { getState, setState } = utilizeState(Person);
-console.log(`name: ${getState().name}   age: ${getState().age}`);
+// const { getState, setState } = utilizeState(Person);
+// console.log(`name: ${getState().name}   age: ${getState().age}`);
 
-setState(value => ({
-    name: "kim",
-    age: 15,
-    dispatch: (a, b) => {
-        setState(prev => ({ ...prev, name: a ? a : "", age: b ? b: 0 }));
-    }
-}));
+// setState(value => ({
+//     name: "kim",
+//     age: 15,
+//     dispatch: (a, b) => {
+//         setState(prev => ({ ...prev, name: a ? a : "", age: b ? b: 0 }));
+//     },
+//     reset: () => { setState(Person) }
+// }));
 
-getState().dispatch("james", 20);
-console.log(`name: ${getState().name}   age: ${getState().age}`);
-*/
+// getState().dispatch("james", 20);
+// console.log(`name: ${getState().name}   age: ${getState().age}`);
+
+// getState().reset();
+// console.log(`name: ${getState().name}   age: ${getState().age}`);
 
 /* no store actions */
 // type Iinter = { args: number; };
@@ -361,24 +366,104 @@ console.log(`name: ${getState().name}   age: ${getState().age}`);
 // getState().dispatch(reducer, { type: types.inc, by: 2 });  // 원하는 리듀서를 인자로 전달
 // console.log(getState().grumps);
 
-interface Keys {
-    args1: number,
-    args2: string
-}
+// interface Keys {
+//     args1: number,
+//     args2: string
+// }
 
-interface Action {
-    update: () => void,
-    dispatch: () => void
-}
+// interface Action {
+//     update: () => void,
+//     dispatch: (args1: number, args2: string) => void
+// }
 
-const keyStore: Keys = {
-    args1: 0,
-    args2: ""
-}
+// const keyStore: Keys = {
+//     args1: 0,
+//     args2: ""
+// }
 
-const ActionStore: Action = {
-    update: () => {},
-    dispatch: () => {}
-}
+// const ActionStore: Action = {
+//     update: () => {},
+//     dispatch: (a1: number, a2: string) => {}
+// }
 
-const { getState, setState } = utilizeMultipleStore(keyStore, ActionStore);
+// const { getStates, setStates } = utilizeMultipleState(keyStore, ActionStore);
+// console.log(getStates());
+
+// setStates((v: any) => ({
+//     args1: 1,
+//     arg2: "kim",
+//     update: () => {
+//         setStates((p: any) => ({ ...p, args1: p.args1 + 1, args2: "james" }));
+//     },
+//     dispatch: (a: number, b: string) => {
+//         setStates((p: any) => ({ ...p, args1: a, args2: b }));
+//     } 
+// }));
+
+// getStates().update();
+// console.log(getStates());
+
+// getStates().dispatch(1, "james");
+// console.log(getStates());
+
+// interface Keys {
+//     args1: number,
+//     args2: string
+// }
+
+// interface Action {
+//     update: () => void,
+//     dispatch: (args1: number, args2: string) => void
+// }
+
+// const keyStore: Keys = {
+//     args1: 0,
+//     args2: ""
+// }
+
+// const ActionStore: Action = {
+//     update: () => {},
+//     dispatch: (a1: number, a2: string) => {}
+// }
+
+// interface A {
+//     args: number,
+//     message: string
+// }
+
+// interface B {
+//     updateArgs: (value: number) => void,
+//     updateMessage: (value: string) => void
+// }
+
+// const Keys: A = {
+//     args: 0,
+//     message: ""
+// }
+
+// const Action: B = {
+//     updateArgs: (v) => {},
+//     updateMessage: (v) => {}
+// }
+
+// const test1 = utilizeState(Keys);
+// const test2 = utilizeState(Action);
+
+// const { getState, setState } = utilizeMultipleState(test1, test2);
+// console.log(getState[0]());
+
+// setState[1](value => ({
+//     updateArgs: (v) => {
+//         setState[0](prev => ({ ...prev, args: v }));
+//     },
+//     updateMessage: (v) => {
+//         setState[0](prev => ({ ...prev, message: v }));
+//     }
+// }));
+
+// getState[1]().updateArgs(1);
+// getState[1]().updateMessage("kim");
+
+// console.log(getState[0]());
+
+/* 멀티플 테스트 성공 */
