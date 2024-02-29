@@ -37,7 +37,7 @@ interface Store<T> {
   setState: (updater: StateSetter<T>) => void;
 }
 
-export function utilizeMultipleState<T extends Store<any>[]>(...stores: T): 
+export function utilizeStateAll<T extends Store<any>[]>(...stores: T): 
   { 
     getState: { [K in keyof T]: T[K]['getState'] },
     setState: { [K in keyof T]: T[K]['setState'] },

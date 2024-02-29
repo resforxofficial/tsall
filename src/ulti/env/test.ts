@@ -1,4 +1,4 @@
-import { utilizeImmer, utilizeMultipleState, utilizeReduce, utilizeState } from "../src/index.fn";
+import { utilizeImmer, utilizeReduce, utilizeState } from "../src/index.fn";
 
 // interface MyState {
 //   count: number;
@@ -467,3 +467,30 @@ console.log(getState().grumps);
 // console.log(getState[0]());
 
 /* 멀티플 테스트 성공 */
+
+function mergeObjects<T extends object, U extends object, V extends object>(obj1: T, obj2: U, obj3?: V): T & U & V {
+    return Object.assign({}, obj1, obj2, obj3);
+}
+
+interface A {
+    args_a: number,
+    args_b: string,
+}
+
+interface B {
+    update: (value: number | string) => void,
+    dispatch: (value: number | string) => void
+}
+
+const Keys: A = {
+    args_a: 0,
+    args_b: "",
+}
+
+const Action: B = {
+    update: (v) => {},
+    dispatch: (f) => {}
+}
+
+const merged = mergeObjects(Keys, Action);
+console.log(merged);
