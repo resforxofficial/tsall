@@ -468,10 +468,6 @@ console.log(getState().grumps);
 
 /* 멀티플 테스트 성공 */
 
-function mergeObjects<T extends object, U extends object, V extends object>(obj1: T, obj2: U, obj3?: V): T & U & V {
-    return Object.assign({}, obj1, obj2, obj3);
-}
-
 interface A {
     args_a: number,
     args_b: string,
@@ -492,5 +488,12 @@ const Action: B = {
     dispatch: (f) => {}
 }
 
-const merged = mergeObjects(Keys, Action);
-console.log(merged);
+function mergeObjects<T extends object>(...state:  T[]) {
+    let toMerge = state.reduce((pv, cv) => {
+        return Object.assign(pv, cv);
+    })
+
+    return toMerge;
+}
+
+// mergeObjects(Keys, Action)
