@@ -468,32 +468,33 @@ console.log(getState().grumps);
 
 /* 멀티플 테스트 성공 */
 
-interface A {
-    args_a: number,
-    args_b: string,
-}
+// interface A {
+//     args_a: number,
+//     args_b: string,
+// }
 
-interface B {
-    update: (value: number | string) => void,
-    dispatch: (value: number | string) => void
-}
+// interface B {
+//     update: (value: number | string) => void,
+//     dispatch: (value: number | string) => void
+// }
 
-const Keys: A = {
-    args_a: 0,
-    args_b: "",
-}
+// const Keys: A = {
+//     args_a: 0,
+//     args_b: "",
+// }
 
-const Action: B = {
-    update: (v) => {},
-    dispatch: (f) => {}
-}
+// const Action: B = {
+//     update: (v) => {},
+//     dispatch: (f) => {}
+// }
 
-function mergeObjects<T extends object>(...state:  T[]) {
-    let toMerge = state.reduce((pv, cv) => {
-        return Object.assign(pv, cv);
-    })
+// function mergeObjects<T extends object>(...state:  T[]) {
+//     let toMerge = state.reduce((pv, cv) => {
+//         return Object.assign(pv, cv);
+//     })
 
-    return toMerge;
-}
+//     return toMerge;
+// }
 
 // mergeObjects(Keys, Action)
+
