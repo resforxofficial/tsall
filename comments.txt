@@ -96,3 +96,54 @@ export function utilizeMemo<T>(factory: () => T, deps: any[]): T {
     return memoValue;
   };
 }
+
+// 사용자 정보를 불러오는 비동기 함수
+const fetchUser = async (userId: string) => {
+  const response = await fetch(`/api/user/${userId}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch user');
+  }
+  return response.json();
+};
+
+// useAsyncState를 사용하여 사용자 정보를 불러오고 그 상태를 추적
+const [userState, loadUser] = useAsyncState(() => fetchUser('123'));
+
+// 사용자 정보를 불러옵니다.
+loadUser();
+
+// 이후에는 userState를 통해 사용자 정보를 불러오는 작업의 상태를 확인할 수 있습니다.
+if (userState.loading) {
+  console.log('Loading user...');
+} else if (userState.error) {
+  console.error('Failed to load user:', userState.error);
+} else if (userState.data) {
+  console.log('Loaded user:', userState.data);
+}
+
+interface AsyncState<T> {
+  loading: boolean;
+  data: T | null;
+  error: Error | null;
+}
+
+function useAsyncState<T>(asyncAction: () => Promise<T>): [AsyncState<T>, () => Promise<void>] {
+  const { getState, setState } = utilizeState<AsyncState<T>>({
+    loading: false,
+    data: null,
+    error: null
+  });
+
+  const execute = async () => {
+    setState({ loading: true, data: null, error: null });
+
+    try {
+      const data = await asyncAction();
+      setState({ loading: false, data, error: null });
+    } catch (error) {
+      setState({ loading: false, data: null, error: getState().error });
+    }
+  };
+
+  return [getState(), execute];
+}

@@ -498,3 +498,19 @@ console.log(getState().grumps);
 
 // mergeObjects(Keys, Action)
 
+// function statetest<T>(a: T): [() => T, (toUpdate: T) => void] {
+//     const getState = () => a;
+
+//     const setState = (toUpdate: T) => {
+//         return a = toUpdate;
+//     }
+
+//     return [getState, setState];
+// }
+
+// const [state, setState] = statetest<number>(0);
+// for (let i = 0; i < 5; i++) {
+//     setState(state() + 1);
+//     console.log(state());
+// }
+
