@@ -50,7 +50,6 @@ const Counter: Count = {
 }
 
 const { getState, setState } = utilizeState(Counter);
-console.log(getState().count);
 
 setState(value => ({ 
     count: 0, 
@@ -59,10 +58,10 @@ setState(value => ({
     } 
 }));
 
-console.log(getState().count);
+console.log(getState().count); // 0
 getState().setCount();
 
-console.log(getState().count);
+console.log(getState().count); // 1
 */
 
 /*
@@ -514,3 +513,31 @@ console.log(getState().grumps);
 //     console.log(state());
 // }
 
+// 롤백 구현
+interface itest {
+    num: number,
+    up: () => void,
+    reset: () => void,
+    rollback: () => void
+}
+
+const test: itest = {
+    num: 0,
+    up: () => {},
+    reset: () => {},
+    rollback: () => {}
+}
+
+const { getState, setState } = utilizeState(test);
+
+// setState(v => ({
+//     num: 0,
+//     up: () => {
+//         setState(prev => ({ ...prev, num: prev.num + 1 }));
+//     },
+//     reset: () => { setState(test) },
+//     rollback: () => {
+//         setState(utilizeRollback(test)) 대충 이렇게?? 아니면
+//         setState(prev => utilizeRollback(test)) 이정도
+//     }
+// }));
