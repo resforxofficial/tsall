@@ -37,12 +37,12 @@ function add<T>(key: string, initialvalue: T): StoreNode<T> {
     };
 }
 
-const storeNode = add("username", "hi");
-const cba = () => {
-    console.log("username changed");
-}
+// const storeNode = add("username", "hi");
+// const cba = () => {
+//     console.log("username changed");
+// }
 
-const uns = storeNode.subscribe(cba);
-storeNode.notify();
+// const uns = storeNode.subscribe(cba);
+// storeNode.notify();
 
-uns();
+// uns();
