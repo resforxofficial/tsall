@@ -1,4 +1,4 @@
-import { utilizeImmer, utilizeMultipleState, utilizeReduce, utilizeState } from "../src/index.fn";
+import { utilizeImmer, utilizeReduce, utilizeState } from "../src/index.fn";
 
 // interface MyState {
 //   count: number;
@@ -50,7 +50,6 @@ const Counter: Count = {
 }
 
 const { getState, setState } = utilizeState(Counter);
-console.log(getState().count);
 
 setState(value => ({ 
     count: 0, 
@@ -59,10 +58,10 @@ setState(value => ({
     } 
 }));
 
-console.log(getState().count);
+console.log(getState().count); // 0
 getState().setCount();
 
-console.log(getState().count);
+console.log(getState().count); // 1
 */
 
 /*
@@ -467,3 +466,78 @@ console.log(getState().grumps);
 // console.log(getState[0]());
 
 /* 멀티플 테스트 성공 */
+
+// interface A {
+//     args_a: number,
+//     args_b: string,
+// }
+
+// interface B {
+//     update: (value: number | string) => void,
+//     dispatch: (value: number | string) => void
+// }
+
+// const Keys: A = {
+//     args_a: 0,
+//     args_b: "",
+// }
+
+// const Action: B = {
+//     update: (v) => {},
+//     dispatch: (f) => {}
+// }
+
+// function mergeObjects<T extends object>(...state:  T[]) {
+//     let toMerge = state.reduce((pv, cv) => {
+//         return Object.assign(pv, cv);
+//     })
+
+//     return toMerge;
+// }
+
+// mergeObjects(Keys, Action)
+
+// function statetest<T>(a: T): [() => T, (toUpdate: T) => void] {
+//     const getState = () => a;
+
+//     const setState = (toUpdate: T) => {
+//         return a = toUpdate;
+//     }
+
+//     return [getState, setState];
+// }
+
+// const [state, setState] = statetest<number>(0);
+// for (let i = 0; i < 5; i++) {
+//     setState(state() + 1);
+//     console.log(state());
+// }
+
+// 롤백 구현
+interface itest {
+    num: number,
+    up: () => void,
+    reset: () => void,
+    rollback: () => void
+}
+
+const test: itest = {
+    num: 0,
+    up: () => {},
+    reset: () => {},
+    rollback: () => {}
+}
+
+const { getState, setState } = utilizeState(test);
+
+// setState(v => ({
+//     num: 0,
+//     up: () => {
+//         setState(prev => ({ ...prev, num: prev.num + 1 }));
+//     },
+//     reset: () => { setState(test) },
+//     rollback: () => {
+//         setState(utilizeRollback(test)) 대충 이렇게?? 아니면
+//         setState(prev => utilizeRollback(test)) 이정도
+//     }
+// }));

@@ -37,7 +37,7 @@ interface Store<T> {
   setState: (updater: StateSetter<T>) => void;
 }
 
-export function utilizeMultipleState<T extends Store<any>[]>(...stores: T): 
+export function utilizeStateAll<T extends Store<any>[]>(...stores: T): 
   { 
     getState: { [K in keyof T]: T[K]['getState'] },
     setState: { [K in keyof T]: T[K]['setState'] },
@@ -52,3 +52,40 @@ export function utilizeMultipleState<T extends Store<any>[]>(...stores: T):
 
   return { getState: combinedGetState, setState: combinedSetState };
 }
+
+interface IStateWithRollback<T> extends State<T> {
+  rollback: () => void;
+}
+
+// export function utilizeRollback<T>(initialState: T): IStateWithRollback<T> {
+//   let currentState = initialState;
+//   let previousStates: T[] = [];
+
+//   const getState = () => currentState;
+
+//   const setState = (updater: StateSetter<T>) => {
+//       const newState = typeof updater === 'function' ? (updater as (prevState: T) => T)(currentState) : updater;
+//       previousStates.push(currentState);
+//       currentState = newState;
+//   };
+
+//   const rollback = () => {
+//       if (previousStates.length > 0) {
+//           currentState = previousStates.pop() as T;
+//       }
+//   };
+
+//   return { getState, setState, rollback };
+// }
+
+// export function utilizeRollback<T>(updater: (state: T) => T): (state: T) => T {
+//   let prevState: T;
+//   return (state: T) => {
+//     prevState = state; // 현재 상태 저장
+//     const newState = updater(state); // 상태 업데이트
+//     return {
+//       ...newState,
+//       rollback: () => prevState
+//     };
+//   };
+// }

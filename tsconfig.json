@@ -1,19 +1,15 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strict": true,
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "allowImportingTsExtensions": true,
-    "declaration": true,
-    "rootDir": "./src"
-  },
-  "include": [
-    "src/**/*",
-    "**/*.d.ts"
-  ]
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "NodeNext",
+        "lib": ["ES2015", "ES6", "DOM", "ES5"],
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strict": true,
+        "noEmit": true,
+        "declaration": true,
+        "allowImportingTsExtensions": true,
+        "esModuleInterop": true,
+        "moduleResolution": "NodeNext"
+    },
 }
